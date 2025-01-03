@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Board from "@/components/board";
 import Score from "@/components/score";
 import Timer from "@/components/timer";

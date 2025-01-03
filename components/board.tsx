@@ -1,44 +1,70 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Tile as TileModel } from "@/models/tile";
 import styles from "@/styles/board.module.css";
 import Tile from "./tile";
 import { GameContext } from "@/context/game-context";
 import MobileSwiper, { SwipeInput } from "./mobile-swiper";
 import Splash from "./splash";
+import { moveAnimationDuration } from "@/constants";
 
 export default function Board() {
   const { getTiles, moveTiles, startGame, status } = useContext(GameContext);
   const initialized = useRef(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const animationTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
+    async (e: KeyboardEvent) => {
       if (document.activeElement instanceof HTMLInputElement) {
         return;
       }
 
-      // disables page scrolling with keyboard arrows
+      if (isAnimating) return;
+
+      setIsAnimating(true);
+
+      if (animationTimeout.current) {
+        clearTimeout(animationTimeout.current);
+      }
+
       e.preventDefault();
 
-      switch (e.code) {
-        case "ArrowUp":
-          moveTiles("move_up");
-          break;
-        case "ArrowDown":
-          moveTiles("move_down");
-          break;
-        case "ArrowLeft":
-          moveTiles("move_left");
-          break;
-        case "ArrowRight":
-          moveTiles("move_right");
-          break;
+      try {
+        switch (e.code) {
+          case "ArrowUp":
+            await moveTiles("move_up");
+            break;
+          case "ArrowDown":
+            await moveTiles("move_down");
+            break;
+          case "ArrowLeft":
+            await moveTiles("move_left");
+            break;
+          case "ArrowRight":
+            await moveTiles("move_right");
+            break;
+        }
+      } finally {
+        // Устанавливаем таймер для завершения анимации
+        animationTimeout.current = setTimeout(() => {
+          setIsAnimating(false);
+        }, moveAnimationDuration);
       }
     },
-    [moveTiles],
+    [isAnimating, moveTiles]
   );
 
   const handleSwipe = useCallback(
     ({ deltaX, deltaY }: SwipeInput) => {
+      if (isAnimating) return; // Игнорируем новые свайпы, если анимация выполняется
+
+      setIsAnimating(true);
+
+      // Очищаем предыдущий таймер
+      if (animationTimeout.current) {
+        clearTimeout(animationTimeout.current);
+      }
+
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         if (deltaX > 0) {
           moveTiles("move_right");
@@ -52,8 +78,12 @@ export default function Board() {
           moveTiles("move_up");
         }
       }
+
+      animationTimeout.current = setTimeout(() => {
+        setIsAnimating(false);
+      }, moveAnimationDuration);
     },
-    [moveTiles],
+    [isAnimating, moveTiles]
   );
 
   const renderGrid = () => {
