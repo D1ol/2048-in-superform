@@ -2,9 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import Board from "@/components/board";
 import Score from "@/components/score";
+import Timer from "@/components/timer";
+import SaveForm from "@/components/saveForm";
 import styles from "@/styles/index.module.css";
+import { GameContext } from "@/context/game-context";
+import { useContext } from "react";
+import { useState } from "react";
+
 
 export default function Home() {
+  const score = useContext(GameContext);
+  const [formattedTime, setFormattedTime] = useState("00:00");
+
   return (
     <div className={styles.twenty48}>
       <Head>
@@ -31,43 +40,15 @@ export default function Home() {
         <Board />
       </main>
       <div>
-        <h2>🚀 Create your own game</h2>
-        <p>
-          Join my{" "}
-          <a
-            href="https://assets.mateu.sh/r/github-2048-in-react-readme"
-            target="_blank"
-            rel="noopener"
-          >
-            Udemy course
-          </a>{" "}
-          and learn how to create the 2048 game from scratch.
-        </p>
+        <Timer setFormattedTime={setFormattedTime} />
+      </div>
+      <div>
+        <SaveForm score={score.score} time={formattedTime} />
       </div>
       <footer>
         <div className={styles.socials}>
-          <a
-            href="https://github.com/mateuszsokola/2048-in-react"
-            target="_blank"
-            rel="noopener"
-          >
-            <Image
-              src="social-github.svg"
-              alt="2048-in-react on GitHub"
-              width={32}
-              height={32}
-            />
-          </a>
-          <a href="https://twitter.com/msokola" target="_blank" rel="noopener">
-            <Image
-              src="social-twitter.svg"
-              alt="Matéush on Twitter"
-              width={32}
-              height={32}
-            />
-          </a>
         </div>
-        <div>Made with ❤️ by Matéush</div>
+        <div>Forked and customized with ❤️ by D1ol only for Superform Community</div>
       </footer>
     </div>
   );

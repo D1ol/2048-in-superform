@@ -12,6 +12,10 @@ export default function Board() {
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (document.activeElement instanceof HTMLInputElement) {
+        return;
+      }
+
       // disables page scrolling with keyboard arrows
       e.preventDefault();
 
