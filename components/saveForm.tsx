@@ -7,9 +7,9 @@ interface NameInputProps {
 }
 
 const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
-  const [name, setName] = useState<string>(""); // Состояние для имени
-  const [loading, setLoading] = useState<boolean>(false); // Состояние загрузки
-  const [error, setError] = useState<string>(""); // Ошибка, если есть
+  const [name, setName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -17,6 +17,22 @@ const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
 
 
   const handleSubmit = async () => {
+
+    if (!name.trim()) {
+      setError("Provide your name pls");
+      return;
+    }
+
+    if (score < 200) {
+      setError("Try harder, get PIGGY away from Superfrens trap");
+      return;
+    }
+
+    if (!name.trim()) {
+      setError("Name is required!");
+      return;
+    }
+
     const key = `game:${Date.now()}`;
 
     setLoading(true);
@@ -33,7 +49,7 @@ const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
 
       if (response.ok) {
         alert("Score saved successfully!");
-        setName(""); // Очищаем поле
+        setName("");
       } else {
         throw new Error("Failed to save score");
       }
@@ -53,6 +69,7 @@ const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
         onChange={handleNameChange}
         placeholder="Enter your name"
         className={styles.inputName}
+        required={true}
       />
       {error && <p style={{ color: "red" }}>{error}</p>}
       <button onClick={handleSubmit} className={styles.button} disabled={loading}>
