@@ -12,6 +12,7 @@ type State = {
   hasChanged: boolean;
   score: number;
   status: GameStatus;
+  time: number;
 };
 type Action =
   | { type: "create_tile"; tile: Tile }
@@ -21,7 +22,8 @@ type Action =
   | { type: "move_left" }
   | { type: "move_right" }
   | { type: "reset_game" }
-  | { type: "update_status"; status: GameStatus };
+  | { type: "update_status"; status: GameStatus }
+  | { type: "update_time"; time: number };
 
 function createBoard() {
   const board: string[][] = [];
@@ -40,6 +42,7 @@ export const initialState: State = {
   hasChanged: false,
   score: 0,
   status: "ongoing",
+  time: 0
 };
 
 export default function gameReducer(
@@ -47,6 +50,12 @@ export default function gameReducer(
   action: Action,
 ) {
   switch (action.type) {
+    case "update_time": {
+      return {
+        ...state,
+        time: action.time
+      };
+    }
     case "clean_up": {
       const flattenBoard = flattenDeep(state.board);
       const newTiles: TileMap = flattenBoard.reduce(

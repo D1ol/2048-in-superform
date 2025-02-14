@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Redis } from "@upstash/redis";
+import {formatTime} from "@/components/timer"
 
 const redis = new Redis({
   url: process.env.REDIS_URL || "",
@@ -9,19 +10,18 @@ const redis = new Redis({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
-      const { key, name, score, time } = req.body;
-
-      if (typeof score !== "number" || typeof time !== "string" || typeof name !== 'string' ) {
-        return res.status(400).json({ error: "Invalid data format" });
-      }
+      const { name, score, status, time } = req.body;
 
       const keyHash = `game:${Date.now()}`;
 
       await redis.hset(keyHash, {
-        "key": key,
+        "keyHash": keyHash,
         "name": name,
         "score": score,
-        "time": time
+        "status": status,
+        "time": formatTime(time),
+        "win": status == "won",
+        "seconds": time
       });
 
       return res.status(200).json({ message: "Score saved successfully!" });

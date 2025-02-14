@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "@/styles/saveForm.module.css";
+import { GameContext } from "@/context/game-context";
 
 interface NameInputProps {
-  score: number;
-  time: string;
 }
 
-const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
+const NameInput: React.FC<NameInputProps> = () => {
+  const { score, status, time } = useContext(GameContext);
   const [name, setName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -23,8 +23,8 @@ const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
       return;
     }
 
-    if (score < 200) {
-      setError("Try harder, get PIGGY away from Superfrens trap");
+    if (score < 2) {
+      setError("Try to play better");
       return;
     }
 
@@ -32,9 +32,6 @@ const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
       setError("Name is required!");
       return;
     }
-
-    const key = `game:${Date.now()}`;
-
     setLoading(true);
     setError("");
 
@@ -44,7 +41,7 @@ const NameInput: React.FC<NameInputProps> = ({ score, time }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ key, name, score, time }),
+        body: JSON.stringify({name,score, status, time}),
       });
 
       if (response.ok) {

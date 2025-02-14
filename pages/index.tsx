@@ -4,14 +4,9 @@ import Score from "@/components/score";
 import Timer from "@/components/timer";
 import SaveForm from "@/components/saveForm";
 import styles from "@/styles/index.module.css";
-import { GameContext } from "@/context/game-context";
-import { useContext } from "react";
-import { useState } from "react";
 
 
 export default function Home() {
-  const score = useContext(GameContext);
-  const [formattedTime, setFormattedTime] = useState("00:00");
 
   return (
     <div className={styles.twenty48}>
@@ -33,16 +28,16 @@ export default function Home() {
       </Head>
       <header>
         <h1>2048</h1>
-        <Score />
+        <Score/>
       </header>
       <main>
-        <Board />
+        <Board/>
       </main>
       <div>
-        <Timer setFormattedTime={setFormattedTime} />
+        <Timer/>
       </div>
       <div>
-        <SaveForm score={score.score} time={formattedTime} />
+        <SaveForm/>
       </div>
       <footer>
         <div className={styles.socials}>

@@ -30,22 +30,23 @@ export default function Board() {
       e.preventDefault();
 
       try {
-        switch (e.code) {
-          case "ArrowUp":
-            await moveTiles("move_up");
-            break;
-          case "ArrowDown":
-            await moveTiles("move_down");
-            break;
-          case "ArrowLeft":
-            await moveTiles("move_left");
-            break;
-          case "ArrowRight":
-            await moveTiles("move_right");
-            break;
+        if (status == "ongoing") {
+          switch (e.code) {
+            case "ArrowUp":
+              await moveTiles("move_up");
+              break;
+            case "ArrowDown":
+              await moveTiles("move_down");
+              break;
+            case "ArrowLeft":
+              await moveTiles("move_left");
+              break;
+            case "ArrowRight":
+              await moveTiles("move_right");
+              break;
+          }
         }
       } finally {
-        // Устанавливаем таймер для завершения анимации
         animationTimeout.current = setTimeout(() => {
           setIsAnimating(false);
         }, moveAnimationDuration);
@@ -56,11 +57,10 @@ export default function Board() {
 
   const handleSwipe = useCallback(
     ({ deltaX, deltaY }: SwipeInput) => {
-      if (isAnimating) return; // Игнорируем новые свайпы, если анимация выполняется
+      if (isAnimating) return;
 
       setIsAnimating(true);
 
-      // Очищаем предыдущий таймер
       if (animationTimeout.current) {
         clearTimeout(animationTimeout.current);
       }
