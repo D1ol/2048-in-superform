@@ -1,3 +1,4 @@
+import React from "react";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Tile as TileModel } from "@/models/tile";
 import styles from "@/styles/board.module.css";
@@ -87,7 +88,7 @@ export default function Board() {
   );
 
   const renderGrid = () => {
-    const cells: JSX.Element[] = [];
+    const cells: React.JSX.Element[] = [];
     const totalCellsCount = 16;
 
     for (let index = 0; index < totalCellsCount; index += 1) {
