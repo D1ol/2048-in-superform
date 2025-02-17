@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "@/styles/saveForm.module.css";
 import { GameContext } from "@/context/game-context";
 
 interface NameInputProps {
+
 }
 
 const NameInput: React.FC<NameInputProps> = () => {

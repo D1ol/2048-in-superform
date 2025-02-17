@@ -17,7 +17,7 @@ export const moveAnimationDuration = 150; // ms
 /**
  * Game setup
  */
-export const gameWinTileValue = 16;
+export const gameWinTileValue = 2048;
 
 export const gameTileImages: { [key: number]: string } = {
   2: "/tiles/snake2.jpg",
