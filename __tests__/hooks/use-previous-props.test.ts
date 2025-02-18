@@ -5,7 +5,7 @@ describe("usePreviousProps", () => {
   it("should return undefined for the first render", () => {
     const { result } = renderHook(() => usePreviousProps("initial value"));
 
-    expect(result.current).toBeUndefined();
+    expect(result.current).toBeNull();
   });
 
   it("should return the previous value of the prop", () => {

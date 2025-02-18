@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import {
-  containerWidthMobile,
   containerWidthDesktop,
+  containerWidthMobile,
+  gameTileImages,
   mergeAnimationDuration,
-  tileCountPerDimension,
+  tileCountPerDimension
 } from "@/constants";
 import { Tile as TileProps } from "@/models/tile";
 import styles from "@/styles/tile.module.css";
 import usePreviousProps from "@/hooks/use-previous-props";
-
-import { gameTileImages } from "@/constants";
+import Image from "next/image";
 
 
 export default function Tile({ position, value }: TileProps) {
@@ -37,19 +37,20 @@ export default function Tile({ position, value }: TileProps) {
     left: positionToPixels(position[0]),
     top: positionToPixels(position[1]),
     transform: `scale(${scale})`,
-    zIndex: value,
+    zIndex: value
   };
 
   const tileImage = gameTileImages[value];
 
   return (
-    <div className={`${styles.tile} ${styles[`tile${value}`]}`} style={style}>
+    <div className={`${styles.tile} ${styles[`tile${value}`]}`} style={style}
+         aria-label={`TileName ${value}`}>
       {tileImage ? (
-        <img src={tileImage} alt={`Tile ${value}`}
-             className={styles.tileImage} />
-      ) : (
-        value
-      )}
+        <Image src={tileImage} alt={`Tile ${value}`} priority
+               className={styles.tileImage}
+               layout="fill"
+        />
+      ) : (value)}
     </div>
   );
 }
