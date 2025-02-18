@@ -5,6 +5,7 @@ import Timer from "@/components/timer";
 import SaveForm from "@/components/saveForm";
 import styles from "@/styles/index.module.css";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 
 export default function Home() {
@@ -48,12 +49,27 @@ export default function Home() {
       <div>
         <Timer />
       </div>
-
       <div>
         <SaveForm />
       </div>
       <footer>
         <div className={styles.socials}>
+          <a href="https://x.com/diol4ik" target="_blank" rel="noopener">
+            <Image
+              src="social-x.svg"
+              alt="D1ol on X"
+              width={32}
+              height={32}
+            />
+          </a>
+          <a href="https://diol4ik.t.me/" target="_blank" rel="noopener">
+            <Image
+              src="social-telegram.svg"
+              alt="D1ol on Telegram"
+              width={32}
+              height={32}
+            />
+          </a>
         </div>
         <div>Forked and customized with ❤️ by D1ol only for Superform
           Community
