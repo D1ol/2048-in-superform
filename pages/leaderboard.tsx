@@ -13,7 +13,7 @@ const Leaderboard = () => {
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
-      const response = await fetch("/api/leaderboard?type="+leaderboardType);
+      const response = await fetch("/api/leaderboard?type=" + leaderboardType);
       const leaderboardData = await response.json();
       setData(leaderboardData);
     };
