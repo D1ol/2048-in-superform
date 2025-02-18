@@ -77,22 +77,44 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 20px;
+  gap: 20px;
 }
 
 .leaderboardButton {
   background-color: #ffcc00;
   color: #333;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
   transition: background 0.3s;
+  min-width: 150px; /* Обеспечивает одинаковую ширину кнопок */
+  text-align: center;
 }
 
 .leaderboardButton:hover {
-  background-color: #ff9900;
+  background-color: #ff9900; /* Цвет фона при наведении */
+}
+
+.leaderboardButton:active {
+  background-color: #e68a00; /* Цвет фона при нажатии */
+}
+
+.backButton {
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background-color: #45a049;
 }

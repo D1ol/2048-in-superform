@@ -31,7 +31,11 @@ export default function Home() {
       <div className={styles.buttonContainer}>
         <button className={styles.leaderboardButton}
                 onClick={() => router.push("/leaderboard")}>
-          🏆 Leaderboard
+          🏆 Win Leaderboard
+        </button>
+        <button className={styles.leaderboardButton}
+                onClick={() => router.push("/leaderboard?type=score")}>
+          🏆 Score Leaderboard
         </button>
       </div>
       <header>

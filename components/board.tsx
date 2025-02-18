@@ -53,7 +53,7 @@ export default function Board() {
         }, moveAnimationDuration);
       }
     },
-    [isAnimating, moveTiles]
+    [isAnimating, moveTiles, status]
   );
 
   const handleSwipe = useCallback(
