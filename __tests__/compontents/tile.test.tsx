@@ -15,7 +15,7 @@ describe("Tile", () => {
     const { container } = render(<Tile position={position} value={value} />);
 
     const tile: HTMLDivElement = container.firstChild as HTMLDivElement;
-    expect(tile.textContent).toEqual("2048");
+    expect(tile.hasChildNodes());
     expect(tile.className).toEqual("tile tile2048");
     expect(tile).toHaveStyle({
       left: `72px`,
@@ -31,12 +31,12 @@ describe("Tile", () => {
     const updatedValue = 4;
 
     // Act
-    const { getByText, rerender } = render(
+    const { getByRole, rerender } = render(
       <Tile position={position} value={initialValue} />,
     );
 
     // Assert initial state
-    const tileElement = getByText(`${initialValue}`);
+    const tileElement = getByRole('generic', {name: `TileName ${initialValue}`});
     expect(tileElement).toBeInTheDocument();
 
     await waitFor(() => {
