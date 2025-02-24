@@ -1,23 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+  useState
+} from "react";
 import styles from "@/styles/saveForm.module.css";
 import { GameContext } from "@/context/game-context";
+import statusReducer, { initialState } from "@/reducers/status-reducer";
 
 interface NameInputProps {
 
 }
 
-const NameInput: React.FC<NameInputProps> = () => {
+const SaveForm: React.FC<NameInputProps> = () => {
   const { score, status, time } = useContext(GameContext);
   const [name, setName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [statusState, dispatch] = useReducer(statusReducer, initialState);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      dispatch({
+        type: "change_subscribe",
+        status: localStorage.getItem("subscribed") === 'true' ?? false
+      });
+    }
+  }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
+    if (!statusState.subscribed) {
+      window.open("https://x.com/diol4ik", "_blank");
+      dispatch({ type: "change_subscribe", status: true });
+      localStorage.setItem("subscribed", JSON.stringify(true));
+      return;
+    }
+
+    if (loading) return;
 
     if (!name.trim()) {
       setError("Provide your name pls");
@@ -29,10 +53,6 @@ const NameInput: React.FC<NameInputProps> = () => {
       return;
     }
 
-    if (!name.trim()) {
-      setError("Name is required!");
-      return;
-    }
     setLoading(true);
     setError("");
 
@@ -40,9 +60,9 @@ const NameInput: React.FC<NameInputProps> = () => {
       const response = await fetch("/api/saveScore", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({name,score, status, time}),
+        body: JSON.stringify({ name, score, status, time })
       });
 
       if (response.ok) {
@@ -56,7 +76,7 @@ const NameInput: React.FC<NameInputProps> = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [name, score, status, time, loading, statusState.subscribed]);
 
   return (
     <div>
@@ -69,12 +89,13 @@ const NameInput: React.FC<NameInputProps> = () => {
         className={styles.inputName}
         required={true}
       />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button onClick={handleSubmit} className={styles.button} disabled={loading}>
-        {loading ? "Saving..." : "Save Score"}
+      <button onClick={handleSubmit} className={styles.button}
+              disabled={loading}>
+        {loading ? "Saving..." : statusState.subscribed ? "Save score" : "Follow on X"}
       </button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
 
-export default NameInput;
+export default SaveForm;

@@ -1,0 +1,35 @@
+
+.socials {
+  justify-content: center;
+  margin-bottom: calc(var(--pixel-size) * 2);
+  text-align: center;
+
+}
+
+.socials > .logos {
+  display: flex;
+
+}
+
+.socials > .logos > a > img {
+  vertical-align: middle;
+  margin: calc(var(--pixel-size) * 0.5);
+}
+
+@media (min-width: 512px) {
+  .socials {
+    justify-content: center;
+    margin-bottom: calc(var(--pixel-size) * 0);
+  }
+
+  .socials > .logos {
+    display: flex;
+    justify-content: center
+  }
+
+
+  .socials > .logos > a > img:last-child {
+    margin: calc(var(--pixel-size) * 1);
+    margin-right: calc(var(--pixel-size) * 0);
+  }
+}
