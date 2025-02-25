@@ -28,7 +28,7 @@ const SaveForm: React.FC<NameInputProps> = () => {
     if (typeof window !== "undefined") {
       dispatch({
         type: "change_subscribe",
-        status: localStorage.getItem("subscribed") === 'true' ?? false
+        status: localStorage.getItem("subscribed") === 'true'
       });
     }
   }, []);
