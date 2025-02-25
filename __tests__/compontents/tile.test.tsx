@@ -36,7 +36,9 @@ describe("Tile", () => {
     );
 
     // Assert initial state
-    const tileElement = getByRole('generic', {name: `TileName ${initialValue}`});
+    const tileElement = getByRole("generic", {
+      name: `TileName ${initialValue}`,
+    });
     expect(tileElement).toBeInTheDocument();
 
     await waitFor(() => {

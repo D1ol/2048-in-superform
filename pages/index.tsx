@@ -7,7 +7,6 @@ import styles from "@/styles/index.module.css";
 import { useRouter } from "next/router";
 import Socials from "@/components/socials";
 
-
 export default function Home() {
   const router = useRouter();
 
@@ -15,10 +14,7 @@ export default function Home() {
     <div className={styles.twenty48}>
       <Head>
         <title>Play 2048</title>
-        <meta
-          name="description"
-          content="Friendly 2048 Superform theme game"
-        />
+        <meta name="description" content="Friendly 2048 Superform theme game" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.ico" />
         <link
@@ -30,12 +26,16 @@ export default function Home() {
         <link rel="icon" type="image/png" sizes="16x16" href="favicon16.png" />
       </Head>
       <div className={styles.buttonContainer}>
-        <button className={styles.leaderboardButton}
-                onClick={() => router.push("/leaderboard")}>
+        <button
+          className={styles.leaderboardButton}
+          onClick={() => router.push("/leaderboard")}
+        >
           🏆 Win Leaderboard
         </button>
-        <button className={styles.leaderboardButton}
-                onClick={() => router.push("/leaderboard?type=score")}>
+        <button
+          className={styles.leaderboardButton}
+          onClick={() => router.push("/leaderboard?type=score")}
+        >
           🏆 Score Leaderboard
         </button>
       </div>

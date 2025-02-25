@@ -17,5 +17,4 @@ export function formatTime(seconds: number) {
   return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
-
 export default Timer;

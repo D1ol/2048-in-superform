@@ -1,14 +1,11 @@
-
 .socials {
   justify-content: center;
   margin-bottom: calc(var(--pixel-size) * 2);
   text-align: center;
-
 }
 
 .socials > .logos {
   display: flex;
-
 }
 
 .socials > .logos > a > img {
@@ -24,9 +21,8 @@
 
   .socials > .logos {
     display: flex;
-    justify-content: center
+    justify-content: center;
   }
-
 
   .socials > .logos > a > img:last-child {
     margin: calc(var(--pixel-size) * 1);

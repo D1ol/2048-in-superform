@@ -42,7 +42,7 @@ export const initialState: State = {
   hasChanged: false,
   score: 0,
   status: "ongoing",
-  time: 0
+  time: 0,
 };
 
 export default function gameReducer(
@@ -53,7 +53,7 @@ export default function gameReducer(
     case "update_time": {
       return {
         ...state,
-        time: action.time
+        time: action.time,
       };
     }
     case "clean_up": {

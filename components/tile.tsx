@@ -5,13 +5,12 @@ import {
   containerWidthMobile,
   gameTileImages,
   mergeAnimationDuration,
-  tileCountPerDimension
+  tileCountPerDimension,
 } from "@/constants";
 import { Tile as TileProps } from "@/models/tile";
 import styles from "@/styles/tile.module.css";
 import usePreviousProps from "@/hooks/use-previous-props";
 import Image from "next/image";
-
 
 export default function Tile({ position, value }: TileProps) {
   const isWideScreen = useMediaQuery({ minWidth: 512 });
@@ -37,20 +36,28 @@ export default function Tile({ position, value }: TileProps) {
     left: positionToPixels(position[0]),
     top: positionToPixels(position[1]),
     transform: `scale(${scale})`,
-    zIndex: value
+    zIndex: value,
   };
 
   const tileImage = gameTileImages[value];
 
   return (
-    <div className={`${styles.tile} ${styles[`tile${value}`]}`} style={style}
-         aria-label={`TileName ${value}`}>
+    <div
+      className={`${styles.tile} ${styles[`tile${value}`]}`}
+      style={style}
+      aria-label={`TileName ${value}`}
+    >
       {tileImage ? (
-        <Image src={tileImage} alt={`Tile ${value}`} priority
-               className={styles.tileImage}
-               layout="fill"
+        <Image
+          src={tileImage}
+          alt={`Tile ${value}`}
+          priority
+          className={styles.tileImage}
+          layout="fill"
         />
-      ) : (value)}
+      ) : (
+        value
+      )}
     </div>
   );
 }

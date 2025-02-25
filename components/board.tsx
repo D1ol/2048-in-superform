@@ -53,7 +53,7 @@ export default function Board() {
         }, moveAnimationDuration);
       }
     },
-    [isAnimating, moveTiles, status]
+    [isAnimating, moveTiles, status],
   );
 
   const handleSwipe = useCallback(
@@ -84,7 +84,7 @@ export default function Board() {
         setIsAnimating(false);
       }, moveAnimationDuration);
     },
-    [isAnimating, moveTiles]
+    [isAnimating, moveTiles],
   );
 
   const renderGrid = () => {

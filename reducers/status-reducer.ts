@@ -2,22 +2,20 @@ type State = {
   subscribed: boolean;
 };
 
-export const initialState: State =
-  {
-    subscribed: false
-  };
+export const initialState: State = {
+  subscribed: false,
+};
 
-type Action =
-  | { type: "change_subscribe", status: boolean }
+type Action = { type: "change_subscribe"; status: boolean };
 
 export default function statusReducer(
   state: State = initialState,
-  action: Action
+  action: Action,
 ) {
   switch (action.type) {
     case "change_subscribe": {
       return {
-        subscribed: action.status
+        subscribed: action.status,
       };
     }
     default:

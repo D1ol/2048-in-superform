@@ -17,7 +17,7 @@ export const moveAnimationDuration = 150; // ms
 /**
  * Game setup
  */
-export const gameWinTileValue = process.env.NEXT_PUBLIC_WIN_TILE_VALUE||2048;
+export const gameWinTileValue = process.env.NEXT_PUBLIC_WIN_TILE_VALUE || 2048;
 
 export const gameTileImages: { [key: number]: string } = {
   2: "/tiles/snake2.jpg",
@@ -30,5 +30,5 @@ export const gameTileImages: { [key: number]: string } = {
   256: "/tiles/piggy256.png",
   512: "/tiles/piggy512.png",
   1024: "/tiles/piggy1024.png",
-  2048: "/tiles/piggy2048.png"
+  2048: "/tiles/piggy2048.png",
 };

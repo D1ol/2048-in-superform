@@ -3,15 +3,13 @@ import React, {
   useContext,
   useEffect,
   useReducer,
-  useState
+  useState,
 } from "react";
 import styles from "@/styles/saveForm.module.css";
 import { GameContext } from "@/context/game-context";
 import statusReducer, { initialState } from "@/reducers/status-reducer";
 
-interface NameInputProps {
-
-}
+interface NameInputProps {}
 
 const SaveForm: React.FC<NameInputProps> = () => {
   const { score, status, time } = useContext(GameContext);
@@ -28,7 +26,7 @@ const SaveForm: React.FC<NameInputProps> = () => {
     if (typeof window !== "undefined") {
       dispatch({
         type: "change_subscribe",
-        status: localStorage.getItem("subscribed") === 'true'
+        status: localStorage.getItem("subscribed") === "true",
       });
     }
   }, []);
@@ -60,9 +58,9 @@ const SaveForm: React.FC<NameInputProps> = () => {
       const response = await fetch("/api/saveScore", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, score, status, time })
+        body: JSON.stringify({ name, score, status, time }),
       });
 
       if (response.ok) {
@@ -89,9 +87,16 @@ const SaveForm: React.FC<NameInputProps> = () => {
         className={styles.inputName}
         required={true}
       />
-      <button onClick={handleSubmit} className={styles.button}
-              disabled={loading}>
-        {loading ? "Saving..." : statusState.subscribed ? "Save score" : "Follow on X"}
+      <button
+        onClick={handleSubmit}
+        className={styles.button}
+        disabled={loading}
+      >
+        {loading
+          ? "Saving..."
+          : statusState.subscribed
+            ? "Save score"
+            : "Follow on X"}
       </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

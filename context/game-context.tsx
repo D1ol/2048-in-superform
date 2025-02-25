@@ -22,7 +22,7 @@ export const GameContext = createContext({
   moveTiles: (_: MoveDirection) => {},
   getTiles: () => [] as Tile[],
   startGame: () => {},
-  time: 0
+  time: 0,
 });
 
 export default function GameProvider({ children }: PropsWithChildren) {
@@ -133,7 +133,6 @@ export default function GameProvider({ children }: PropsWithChildren) {
     }
   }, [gameState.status, gameState.time]);
 
-
   return (
     <GameContext.Provider
       value={{
@@ -142,7 +141,7 @@ export default function GameProvider({ children }: PropsWithChildren) {
         getTiles,
         moveTiles,
         startGame,
-        time: gameState.time
+        time: gameState.time,
       }}
     >
       {children}
