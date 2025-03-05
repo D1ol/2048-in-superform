@@ -8,7 +8,8 @@ import React, {
 import styles from "@/styles/saveForm.module.css";
 import { GameContext } from "@/context/game-context";
 import statusReducer, { initialState } from "@/reducers/status-reducer";
-import bcrypt from "bcryptjs";
+import CryptoJS from "crypto-js";
+
 
 interface NameInputProps {
 }
@@ -55,7 +56,7 @@ const SaveForm: React.FC<NameInputProps> = (props) => {
       time: timeRef.current,
       apiSalt,
     });
-    const generatedSalt = bcrypt.hashSync(jsonString, apiSalt);
+    const generatedSalt = CryptoJS.SHA256(jsonString + apiSalt).toString(CryptoJS.enc.Base64);
 
     if (!statusState.subscribed) {
       window.open("https://x.com/diol4ik", "_blank");

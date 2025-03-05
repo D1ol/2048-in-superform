@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Redis } from "@upstash/redis";
 import { formatTime } from "@/components/timer";
-import bcrypt from "bcryptjs";
+import CryptoJS from "crypto-js";
 
 
 const redis = new Redis({
@@ -22,8 +22,14 @@ export default async function handler(
       const apiSalt = Number(process.env.NEXT_PUBLIC_API_SALT);
 
       const jsonString = JSON.stringify({name,score, status, time, apiSalt});
-      const compared = bcrypt.compareSync(jsonString, generatedSalt);
+      const gen = CryptoJS.SHA256(jsonString + apiSalt).toString(CryptoJS.enc.Base64);
 
+      let compared = false;
+
+      if(generatedSalt === gen)
+      {
+        compared = true;
+      }
 
       await redis.hset(keyHash, {
         keyHash: keyHash,
