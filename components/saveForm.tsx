@@ -8,7 +8,8 @@ import React, {
 import styles from "@/styles/saveForm.module.css";
 import { GameContext } from "@/context/game-context";
 import statusReducer, { initialState } from "@/reducers/status-reducer";
-import CryptoJS from "crypto-js";
+import sha256 from 'crypto-js/sha256';
+import base64 from 'crypto-js/enc-base64'
 
 
 interface NameInputProps {
@@ -53,10 +54,9 @@ const SaveForm: React.FC<NameInputProps> = (props) => {
       name,
       score: scoreRef.current,
       status: statusRef.current,
-      time: timeRef.current,
-      apiSalt,
+      time: timeRef.current
     });
-    const generatedSalt = CryptoJS.SHA256(jsonString + apiSalt).toString(CryptoJS.enc.Base64);
+    const generatedSalt = sha256(jsonString + apiSalt).toString(base64);
 
     if (!statusState.subscribed) {
       window.open("https://x.com/diol4ik", "_blank");
