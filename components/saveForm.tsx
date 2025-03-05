@@ -8,6 +8,8 @@ import React, {
 import styles from "@/styles/saveForm.module.css";
 import { GameContext } from "@/context/game-context";
 import statusReducer, { initialState } from "@/reducers/status-reducer";
+import bcrypt from "bcryptjs";
+
 
 interface NameInputProps {}
 
@@ -17,6 +19,10 @@ const SaveForm: React.FC<NameInputProps> = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [statusState, dispatch] = useReducer(statusReducer, initialState);
+
+  const apiSalt = Number(process.env.NEXT_PUBLIC_API_SALT);
+  const jsonString = JSON.stringify({name,score, status, time, apiSalt});
+  const generatedSalt =bcrypt.hashSync(jsonString, apiSalt);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -60,7 +66,7 @@ const SaveForm: React.FC<NameInputProps> = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, score, status, time }),
+        body: JSON.stringify({name,score, status, time, generatedSalt}),
       });
 
       if (response.ok) {
