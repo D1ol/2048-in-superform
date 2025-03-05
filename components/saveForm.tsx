@@ -41,7 +41,7 @@ const SaveForm: React.FC<NameInputProps> = (props) => {
         status: localStorage.getItem("subscribed") === "true",
       });
     }
-  }, [statusReducer]);
+  }, []);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
