@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  gap: calc(var(--pixel-size) * 2);
+  justify-content: center;
+  align-items: center;
+  background: var(--secondary-background);
+  padding: calc(var(--pixel-size) * 1);
+  border-radius: calc(var(--pixel-size) * 1);
+}
+
+.score, .timer {
+  text-align: center;
+  font-weight: bold;
+  background: var(--secondary-background);
+  border: calc(var(--pixel-size) * 0.5) solid var(--secondary-background);
+  border-radius: calc(var(--pixel-size) * 0.75);
+  color: var(--tile-background);
+  padding: calc(var(--pixel-size) * 1);
+  min-width: 100px;
+}
+
+.score span, .timer span {
+  font-size: calc(var(--pixel-size) * 1.5);
+  text-transform: uppercase;
+}
+
+.score div, .timer div {
+  font-size: calc(var(--pixel-size) * 2);
+  color: var(--secondary-text-color); /* Цвет для текста числа, чтобы не сливался с фоном */
+}
+
+/* Адаптивность для больших экранов */
+@media (min-width: 512px) {
+  .score span, .timer span {
+    font-size: calc(var(--pixel-size) * 2);
+  }
+
+  .score div, .timer div {
+    font-size: calc(var(--pixel-size) * 3);
+  }
+}

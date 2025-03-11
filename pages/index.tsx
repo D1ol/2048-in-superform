@@ -6,6 +6,9 @@ import SaveForm from "@/components/saveForm";
 import styles from "@/styles/index.module.css";
 import { useRouter } from "next/router";
 import Socials from "@/components/socials";
+import GameSelector from "@/components/gameSelector";
+import ScoreTimer from "@/components/scoreTimer";
+
 
 export default function Home() {
   const router = useRouter();
@@ -41,16 +44,14 @@ export default function Home() {
       </div>
       <header>
         <h1>2048</h1>
-        <Score />
+        <ScoreTimer />
       </header>
       <main>
         <Board />
       </main>
       <div>
-        <Timer />
-      </div>
-      <div>
         <SaveForm />
+        <GameSelector />
       </div>
       <footer>
         <Socials />
