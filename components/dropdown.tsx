@@ -13,12 +13,12 @@ const DropdownMenu = () => {
   return (
     <div className={styles.dropdown}>
       <button onClick={toggleMenu} className={styles.dropdownToggle}>
-        How to Play
+        How to Play / Tiles
       </button>
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <button className={styles.closeButton} onClick={toggleMenu}>✖</button>
-          <h2 className={styles.heading}>How to Play</h2>
+          <h2 className={styles.heading}>How to Play / Tiles</h2>
           <p>Use arrow keys or swipe to move tiles.</p>
           <p>When two tiles with the same number touch, they merge!</p>
           <p>Goal: Reach the final 2048 tile to WIN!</p>

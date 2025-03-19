@@ -14,11 +14,14 @@
 .twenty48 > header {
   display: flex;
   align-items: center;
-  margin: calc(var(--pixel-size) * 1) calc(var(--pixel-size) * 0);
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .twenty48 > header > * {
+  margin: calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 0);
   flex: 1;
+  min-width: 120px;
 }
 
 .twenty48 > footer {
@@ -70,16 +73,16 @@
   cursor: pointer;
   border-radius: 5px;
   transition: background 0.3s;
-  min-width: 150px; /* Обеспечивает одинаковую ширину кнопок */
+  min-width: 150px;
   text-align: center;
 }
 
 .leaderboardButton:hover {
-  background-color: #ff9900; /* Цвет фона при наведении */
+  background-color: #ff9900;
 }
 
 .leaderboardButton:active {
-  background-color: #e68a00; /* Цвет фона при нажатии */
+  background-color: #e68a00;
 }
 
 .backButton {

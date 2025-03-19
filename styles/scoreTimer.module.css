@@ -16,7 +16,6 @@
   border-radius: calc(var(--pixel-size) * 0.75);
   color: var(--tile-background);
   padding: calc(var(--pixel-size) * 1);
-  min-width: 100px;
 }
 
 .score span, .timer span {
@@ -26,10 +25,9 @@
 
 .score div, .timer div {
   font-size: calc(var(--pixel-size) * 2);
-  color: var(--secondary-text-color); /* Цвет для текста числа, чтобы не сливался с фоном */
+  color: var(--secondary-text-color);
 }
 
-/* Адаптивность для больших экранов */
 @media (min-width: 512px) {
   .score span, .timer span {
     font-size: calc(var(--pixel-size) * 2);

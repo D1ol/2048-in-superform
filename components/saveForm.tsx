@@ -122,7 +122,7 @@ const SaveForm: React.FC<NameInputProps> = (props) => {
           ? "Saving..."
           : statusState.subscribed
             ? "Save score"
-            : "Follow on X"}
+            : "Save / Follow on X"}
       </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
